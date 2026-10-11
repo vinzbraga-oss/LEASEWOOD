@@ -1,0 +1,22 @@
+name: Gemini Code Review
+
+# 1. When the action runs
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+# 2. What the action does
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm install @google/generative-ai @actions/github
+      - name: Run Gemini Review
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: node .github/scripts/review.js  
