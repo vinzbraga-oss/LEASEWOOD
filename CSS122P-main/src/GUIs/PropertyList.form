@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="3"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <Component id="pnlFilter" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblProperty1Info" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProperty1Price" min="-2" pref="106" max="-2" attributes="0"/>
+                          <Component id="btnViewProperty1" min="-2" pref="106" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="328" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblProperty2Info" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProperty2Price" min="-2" pref="106" max="-2" attributes="0"/>
+                          <Component id="btnViewProperty2" min="-2" pref="106" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
+                      <Component id="btnProperty1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnProperty2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="146" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblProperty1Image" alignment="0" min="-2" pref="314" max="-2" attributes="0"/>
+                          <Component id="lblProperty3Image" alignment="0" min="-2" pref="317" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace pref="80" max="32767" attributes="0"/>
+                              <Component id="lblProperty2Image" min="-2" pref="315" max="-2" attributes="0"/>
+                              <EmptySpace pref="65" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="lblProperty4Image" min="-2" pref="315" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+              </Group>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="lblPropertyTitle" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="281" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="279" max="-2" attributes="0"/>
+              <Component id="btnProperty3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnProperty4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="167" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblProperty3Info" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblProperty3Price" min="-2" pref="106" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="btnViewProperty3" min="-2" pref="106" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblProperty4Price" min="-2" pref="106" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="149" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblProperty4Info" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnViewProperty4" min="-2" pref="106" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="lblPropertyTitle" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblProperty1Image" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProperty2Image" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnProperty2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnProperty1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblProperty2Price" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProperty1Price" alignment="3" min="-2" pref="16" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblProperty2Info" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProperty1Info" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnViewProperty2" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnViewProperty1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="17" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblProperty3Image" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProperty4Image" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="264" max="32767" attributes="0"/>
+                      <Component id="pnlFilter" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnProperty4" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="btnProperty3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblProperty3Price" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblProperty4Price" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lblProperty3Info" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblProperty4Info" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnViewProperty3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnViewProperty4" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblPropertyTitle">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="24" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="AVAILABLE PROPERTIES"/>
+      </Properties>
+    </Component>
+    <Container class="javax.swing.JPanel" name="pnlFilter">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="chk3Bedrooms" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkWithAttic" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chk3Bathrooms" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chk2Bathrooms" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chk5Bedrooms" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="chkWithLanai" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                          <Component id="btnApplyFilter" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" pref="51" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <Component id="chk5Bedrooms" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <Component id="chk3Bedrooms" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <Component id="chkWithAttic" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <Component id="chk3Bathrooms" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <Component id="chk2Bathrooms" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                  <Component id="chkWithLanai" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="btnApplyFilter" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="44" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JCheckBox" name="chk5Bedrooms">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="5 Bedrooms"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel2">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="12" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="FILTER"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chk3Bedrooms">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="3 Bedrooms"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkWithAttic">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="W/ Attic"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chk3Bathrooms">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="3 Toilet &amp; Bathrooms"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chk2Bathrooms">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="2 Toilet &amp; Bathrooms"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="chkWithLanai">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="W/ Lanai"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnApplyFilter">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="APPLY FILTER"/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JLabel" name="lblProperty1Image">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty2Image">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty3Image">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty4Image">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="jLabel1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnProperty1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="KAYLA"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProperty1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnProperty2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ALEXANDRIA"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProperty2ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnProperty3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="AMARA"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProperty3ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnProperty4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ARYA"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnProperty4ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty1Price">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total Selling Price"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty1Info">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Floor area | Lot area"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnViewProperty1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Details"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty2Price">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total Selling Price"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty2Info">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Floor area | Lot area"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnViewProperty2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Details"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty3Price">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total Selling Price"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty3Info">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Floor area | Lot area"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnViewProperty3">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Details"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty4Price">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Total Selling Price"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblProperty4Info">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Floor area | Lot area"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnViewProperty4">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View Details"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>
