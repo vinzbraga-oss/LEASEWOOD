@@ -4,19 +4,38 @@
  */
 package GUIs;
 
+import MyLib.Property;
+
 /**
  *
  * @author User
  */
 public class PropertyDetails extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PropertyDetails.class.getName());
+    private Property currentProperty;
 
-    /**
-     * Creates new form PropertyDetails
-     */
-    public PropertyDetails() {
+    // Modify the default constructor to require a Property parameter
+    public PropertyDetails(Property property) {
+        this.currentProperty = property;
         initComponents();
+        populateData();
+        
+        // Example: Populate your UI components immediately upon loading
+        // lblPropertyId.setText(currentProperty.getId());
+        // lblPrice.setText(String.valueOf(currentProperty.getPrice()));
+    }
+    private void populateData() {
+        // 1. Display the ID (You can replace this with the Model Name later)
+        lblPropertyName.setText("Property ID: " + currentProperty.getId());
+        
+        // 2. Display the Lot Size
+        lblArea.setText("Lot Area: " + currentProperty.getLotSize() + " sqm");
+        
+        // 3. Display Price and Status
+        String formattedPrice = String.format("PHP %,.2f", currentProperty.getPrice());
+        lblPropertyDetailsInfo.setText("TCP: " + formattedPrice + "  |  Status: " + currentProperty.getStatus());
+        
+        // Note: For lblPropertyImage, you can leave it blank for now 
+        // until we implement the 4 specific house models (ARYA, KAYLA, etc.)
     }
 
     /**
@@ -31,10 +50,6 @@ public class PropertyDetails extends javax.swing.JFrame {
         lblPropertyDetails = new javax.swing.JLabel();
         lblPropertyName = new javax.swing.JLabel();
         lblPropertyDetailsInfo = new javax.swing.JLabel();
-        lblPropertyImage = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         lblArea = new javax.swing.JLabel();
         btnChoosePayment = new javax.swing.JButton();
 
@@ -48,17 +63,10 @@ public class PropertyDetails extends javax.swing.JFrame {
 
         lblPropertyDetailsInfo.setText("<html>\nTwo-storey<br>\nSingle-attached<br>\n3 bedrooms<br>\n2 toilet & bath<br>\nHigh-ceiling living area<br>\nDining and Kitchen Area<br>\nCarport with Deck<br>\nComplete finish\n</html>");
 
-        lblPropertyImage.setText("jLabel3");
-
-        jLabel1.setText("jLabel1");
-
-        jLabel3.setText("jLabel3");
-
-        jLabel4.setText("jLabel4");
-
         lblArea.setText("<html>\nFloor Area: 79 sqm<br>\nLot Area: 96 sqm\n</html>");
 
-        btnChoosePayment.setText("CHOOSE PAYMENT");
+        btnChoosePayment.setText("REQUEST AGENT");
+        btnChoosePayment.addActionListener(this::btnChoosePaymentActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -67,30 +75,19 @@ public class PropertyDetails extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addGap(347, 347, 347)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblPropertyImage, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblPropertyName, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblPropertyDetailsInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(7, 7, 7)
-                                        .addComponent(btnChoosePayment))))))
+                            .addComponent(lblPropertyName, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPropertyDetailsInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(lblPropertyDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addGap(336, 336, 336)
+                        .addComponent(btnChoosePayment)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblPropertyDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,61 +95,36 @@ public class PropertyDetails extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(lblPropertyDetails)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblPropertyName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPropertyDetailsInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnChoosePayment))
-                    .addComponent(lblPropertyImage))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel3))
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addComponent(lblPropertyName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblPropertyDetailsInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnChoosePayment)
+                .addContainerGap(277, Short.MAX_VALUE))
         );
+
+        btnChoosePayment.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnChoosePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoosePaymentActionPerformed
+        new PaymentOption(currentProperty).setVisible(true);
+        // Close the current details window
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_btnChoosePaymentActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PropertyDetails().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnChoosePayment;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel lblArea;
     private javax.swing.JLabel lblPropertyDetails;
     private javax.swing.JLabel lblPropertyDetailsInfo;
-    private javax.swing.JLabel lblPropertyImage;
     private javax.swing.JLabel lblPropertyName;
     // End of variables declaration//GEN-END:variables
 }

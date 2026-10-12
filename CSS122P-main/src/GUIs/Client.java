@@ -125,11 +125,35 @@ public class Client extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPasswordActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
+        String user = txtUsername.getText();
+        String pass = new String(txtPassword.getPassword());
+
+        MyLib.User authUser = MyLib.UserFactory.authenticateUser(user, pass);
+
+        if (authUser != null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Welcome, " + authUser.getUsername());
+            
+            // Route to the correct JFrame based on the role
+            String role = authUser.getRole();
+            if (role.equals("Client")) {
+                new PropertyList().setVisible(true); // Or whatever your Client Dashboard JFrame is named
+            } else if (role.equals("Agent")) {
+                new AgentDashboard().setVisible(true);
+            } else if (role.equals("Admin")) {
+                new AdminDashboard().setVisible(true);
+            }
+            
+            this.dispose(); // Close the login JFrame
+            
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Invalid credentials.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }// TODO add your handling code here:
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        // TODO add your handling code here:
+        new Register().setVisible(true);
+        this.dispose();
+// TODO add your handling code here:
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**

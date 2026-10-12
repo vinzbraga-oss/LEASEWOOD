@@ -4,18 +4,17 @@
  */
 package GUIs;
 
+import MyLib.Property;
+
 /**
  *
  * @author User
  */
 public class PaymentOption extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(PaymentOption.class.getName());
+    private Property currentProperty;
 
-    /**
-     * Creates new form PaymentOption
-     */
-    public PaymentOption() {
+    public PaymentOption(Property property) {
+        this.currentProperty = property;
         initComponents();
     }
 
@@ -29,43 +28,40 @@ public class PaymentOption extends javax.swing.JFrame {
     private void initComponents() {
 
         lblPaymentTitle = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
         btnContinue = new javax.swing.JButton();
+        lblAmortizationDetails = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblPaymentTitle.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
         lblPaymentTitle.setText("CHOOSE PAYMENT OPTION");
 
-        jRadioButton1.setText("Cash");
-
-        jRadioButton2.setText("Bank Financing");
-
-        jRadioButton3.setText("In-house Financing");
-
         btnContinue.setText("CONTINUE");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Choose payment method", "Spot Cash", "Bank Financing", "In-House Financing", "Pag-ibig Housing Loan", " " }));
+        jComboBox1.addActionListener(this::jComboBox1ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addComponent(lblPaymentTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton3))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(168, 168, 168)
                 .addComponent(btnContinue)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(183, 183, 183))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(lblPaymentTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(125, 125, 125)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addComponent(lblAmortizationDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,49 +69,65 @@ public class PaymentOption extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(lblPaymentTitle)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton1)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(lblAmortizationDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jRadioButton3)
-                .addGap(18, 18, 18)
                 .addComponent(btnContinue)
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGap(23, 23, 23))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String selectedMethod = (String) jComboBox1.getSelectedItem();
+        double price = currentProperty.getPrice();
+
+        // 2. Clear the label if the default prompt is selected
+        if (selectedMethod.equals("Choose payment method")) {
+            lblAmortizationDetails.setText("");
+            return;
+        }
+
+        // 3. Route to the correct Strategy Pattern class
+        MyLib.FinancingStrategy strategy = null;
+
+        switch (selectedMethod) {
+            case "Spot Cash":
+                // Spot cash usually has no interest or a discount
+                lblAmortizationDetails.setText(String.format("One-time payment: PHP %,.2f", price));
+                return; 
+            case "Bank Financing":
+                strategy = new MyLib.BankFinancing();
+                break;
+            case "In-House Financing":
+                strategy = new MyLib.InHouseFinancing();
+                break;
+            case "Pag-ibig Housing Loan":
+                // Ensure this class name matches your actual PagIbig file
+                strategy = new MyLib.PagIbigFinancing(); 
+                break;
+        }
+
+        // 4. Calculate and display the result
+        if (strategy != null) {
+            // Replace 'calculateMonthly()' with the actual method name defined in your FinancingStrategy interface
+            double monthlyPayment = strategy.calculateMonthly(price); 
+            
+            lblAmortizationDetails.setText(String.format("Estimated Monthly: PHP %,.2f", monthlyPayment));
+        }// TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new PaymentOption().setVisible(true));
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnContinue;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel lblAmortizationDetails;
     private javax.swing.JLabel lblPaymentTitle;
     // End of variables declaration//GEN-END:variables
 }

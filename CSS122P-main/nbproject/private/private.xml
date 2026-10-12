@@ -3,9 +3,33 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/vinzb/OneDrive/Documents/NetBeansProjects/CSS122P-main/src/GUIs/Client.java</file>
-            <file>file:/C:/Users/vinzb/OneDrive/Documents/NetBeansProjects/CSS122P-main/src/GUIs/AmortizationTable.java</file>
-            <file>file:/C:/Users/vinzb/OneDrive/Documents/NetBeansProjects/CSS122P-main/src/MyApp/LeaseWood.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/GUIs/AmortizationTable.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyApp/LeaseWood.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/FinancingStrategy.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/BankFinancing.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/InHouseFinancing.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/PagIbigFinancing.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/PropertyState.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/AvailableState.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/ReservedState.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/OccupiedState.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/Property.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/User.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/Admin.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/Agent.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/Buyer.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/UserFactory.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/GUIs/Client.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/GUIs/Register.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/Data.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/LeaseWoodFacade.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/GUIs/AgentDashboard.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/GUIs/AdminDashboard.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/GUIs/PropertyList.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/GUIs/PropertyDetails.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/GUIs/PaymentOption.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/MyLib/Request.java</file>
+            <file>file:/C:/Users/vinzb/OneDrive/Documents/GitHub/LEASEWOOD/CSS122P-main/src/GUIs/ContactAgent.java</file>
         </group>
     </open-files>
 </project-private>

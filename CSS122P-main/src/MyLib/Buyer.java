@@ -3,19 +3,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package MyLib;
+
 import java.io.Serializable;
 
-public class Buyer implements Serializable {
+public class Buyer extends User implements Serializable {
+    
+    public Buyer(String username, String password) {
+        super(username, password); // Passes credentials to User.java
+    }
 
-    public String email;
-    public String name;
-    public String password;
-    public String agent = "";
-
-    public Buyer(String e, String n, String p) {
-        email = e;
-        name = n;
-        password = p;
+    @Override
+    public String getRole() { 
+        return "Client"; 
     }
 }
 

@@ -7,17 +7,20 @@ package MyLib;
 import java.io.Serializable;
 
 public class Request implements Serializable {
+    private String buyerUsername;
+    private String propertyId;
+    private double monthlyIncome;
+    private String preferredPayment;
+    private String status; // e.g., "Pending", "Acknowledged"
 
-    public String buyer;
-    public String property;
-    public String status = "Pending";
-    public String agent = "";
-    public String type;
-
-    public Request(String b, String p, String t) {
-        buyer = b;
-        property = p;
-        type = t;
+    public Request(String buyerUsername, String propertyId, double monthlyIncome, String preferredPayment) {
+        this.buyerUsername = buyerUsername;
+        this.propertyId = propertyId;
+        this.monthlyIncome = monthlyIncome;
+        this.preferredPayment = preferredPayment;
+        this.status = "Pending";
     }
+
+    // Add getters for all fields here...
 }
 

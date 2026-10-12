@@ -54,8 +54,10 @@ public class Register extends javax.swing.JFrame {
         lblConfirmPassword.setText("Confirm Password");
 
         btnRegister.setText("REGISTER");
+        btnRegister.addActionListener(this::btnRegisterActionPerformed);
 
         btnBackToLogin.setText("BACK TO LOGIN");
+        btnBackToLogin.addActionListener(this::btnBackToLoginActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -125,6 +127,39 @@ public class Register extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        String user = txtUsername.getText();
+        String pass = txtPassword.getText();
+        String confirm = txtConfirmPassword.getText();
+
+        if (user.isEmpty() || pass.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+            return;
+        }
+
+        if (!pass.equals(confirm)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Passwords do not match.");
+            return;
+        }
+
+        MyLib.User newBuyer = MyLib.UserFactory.registerNewClient(user, pass);
+
+        if (newBuyer != null) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Account created successfully! Please log in.");
+            new Client().setVisible(true);
+            this.dispose();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Username already exists. Choose another.");
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnBackToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToLoginActionPerformed
+        new Client().setVisible(true);
+        this.dispose();
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnBackToLoginActionPerformed
 
     /**
      * @param args the command line arguments
