@@ -2,40 +2,111 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package GUIs;
 
+
+package GUIs;
 import MyLib.Property;
+import MyLib.Buyer;
 
 /**
  *
  * @author User
  */
 public class PropertyDetails extends javax.swing.JFrame {
+    
     private Property currentProperty;
+    private Buyer currentBuyer; 
+    
+    // Gallery tracking variables
+    private String[] imageList; 
+    private int currentImageIndex = 0;
 
-    // Modify the default constructor to require a Property parameter
-    public PropertyDetails(Property property) {
+    public PropertyDetails(Property property, Buyer buyer) {
         this.currentProperty = property;
+        this.currentBuyer = buyer;
         initComponents();
+        
+        // Populate the gallery array based on the renamed files in your screenshot
+        switch (currentProperty.getModelName()) {
+            case "ALEXANDRIA":
+                imageList = new String[]{
+                    "ALEXANDRIA-FLOOR.jpg", 
+                    "ALEXANDRIA-FLOOR2.jpg", 
+                    "ALEXANDRIA-INSIDE1.jpg", "ALEXANDRIA-INSIDE2.jpg", "ALEXANDRIA-INSIDE3.jpg",
+                    "ALEXANDRIA-INSIDE4.jpg", "ALEXANDRIA-INSIDE5.jpg", "ALEXANDRIA-INSIDE6.jpg",
+                    "ALEXANDRIA-INSIDE7.jpg", "ALEXANDRIA-INSIDE8.jpg", "ALEXANDRIA-INSIDE9.jpg",
+                };
+                break;
+            case "AMARA":
+                imageList = new String[]{
+                    "AMARA-FLOOR.jpg",
+                    "AMARA-INSIDE1.jpg", "AMARA-INSIDE2.jpg", "AMARA-INSIDE3.jpg", "AMARA-INSIDE4.jpg"
+                };
+                break;
+            case "ARYA":
+                imageList = new String[]{
+                    "ARYA-FLOOR.jpg",
+                    "ARYA-INSIDE1.jpg", "ARYA-INSIDE2.jpg", "ARYA-INSIDE3.jpg", "ARYA-INSIDE4.jpg",
+                    "ARYA-INSIDE5.jpg", "ARYA-INSIDE6.jpg", "ARYA-INSIDE7.jpg", "ARYA-INSIDE8.jpg",
+                };
+                break;
+            case "KAYLA":
+                imageList = new String[]{
+                    "KAYLA-FLOOR.jpg",
+                    "KAYLA-INSIDE1.jpg", "KAYLA-INSIDE2.jpg", "KAYLA-INSIDE3.jpg", "KAYLA-INSIDE4.jpg", "KAYLA-INSIDE5.jpg" 
+                };
+                break;
+            default:
+                imageList = new String[]{};
+                break;
+        }
+
         populateData();
-        
-        // Example: Populate your UI components immediately upon loading
-        // lblPropertyId.setText(currentProperty.getId());
-        // lblPrice.setText(String.valueOf(currentProperty.getPrice()));
+        loadFrontImage();
+        loadGalleryImage();
     }
+    
     private void populateData() {
-        // 1. Display the ID (You can replace this with the Model Name later)
-        lblPropertyName.setText("Property ID: " + currentProperty.getId());
+        lblPropertyName.setText(currentProperty.getModelName() + " (" + currentProperty.getId() + ")");
+        lblArea.setText("<html>Floor Area: " + currentProperty.getFloorArea() + " sqm<br>Lot Area: " + currentProperty.getLotSize() + " sqm</html>");
+        lblPropertyDetailsInfo.setText(currentProperty.getFeatures());
+    }
+
+    private void loadFrontImage() {
+        try {
+            String model = currentProperty.getModelName();
+            String frontPath = "/Resources/" + model + "/" + model + "-FRONT.jpg";
+            
+            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(frontPath));
+            java.awt.Image scaled = icon.getImage().getScaledInstance(400, 300, java.awt.Image.SCALE_SMOOTH);
+            
+            lblPropertyImage.setIcon(new javax.swing.ImageIcon(scaled));
+            lblPropertyImage.setText(""); 
+        } catch (Exception e) {
+            lblPropertyImage.setIcon(null);
+            lblPropertyImage.setText("Front image not found");
+        }
+    }
+
+    private void loadGalleryImage() {
+        if (imageList == null || imageList.length == 0) {
+            lblGalleryImage.setText("No gallery images available");
+            return;
+        }
         
-        // 2. Display the Lot Size
-        lblArea.setText("Lot Area: " + currentProperty.getLotSize() + " sqm");
-        
-        // 3. Display Price and Status
-        String formattedPrice = String.format("PHP %,.2f", currentProperty.getPrice());
-        lblPropertyDetailsInfo.setText("TCP: " + formattedPrice + "  |  Status: " + currentProperty.getStatus());
-        
-        // Note: For lblPropertyImage, you can leave it blank for now 
-        // until we implement the 4 specific house models (ARYA, KAYLA, etc.)
+        try {
+            String model = currentProperty.getModelName();
+            String galleryPath = "/Resources/" + model + "/" + imageList[currentImageIndex];
+            
+            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(getClass().getResource(galleryPath));
+            java.awt.Image scaled = icon.getImage().getScaledInstance(400, 300, java.awt.Image.SCALE_SMOOTH);
+            
+            lblGalleryImage.setIcon(new javax.swing.ImageIcon(scaled));
+            lblGalleryImage.setText(""); 
+        } catch (Exception e) {
+            lblGalleryImage.setIcon(null);
+            lblGalleryImage.setText("Gallery image missing");
+        }
     }
 
     /**
@@ -51,7 +122,12 @@ public class PropertyDetails extends javax.swing.JFrame {
         lblPropertyName = new javax.swing.JLabel();
         lblPropertyDetailsInfo = new javax.swing.JLabel();
         lblArea = new javax.swing.JLabel();
-        btnChoosePayment = new javax.swing.JButton();
+        btnRequestAgent = new javax.swing.JButton();
+        lblPropertyImage = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        lblGalleryImage = new javax.swing.JLabel();
+        btnNext = new javax.swing.JButton();
+        btnPrev = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,14 +135,20 @@ public class PropertyDetails extends javax.swing.JFrame {
         lblPropertyDetails.setText("PROPERTY DETAILS");
 
         lblPropertyName.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        lblPropertyName.setText("KAYLA");
 
-        lblPropertyDetailsInfo.setText("<html>\nTwo-storey<br>\nSingle-attached<br>\n3 bedrooms<br>\n2 toilet & bath<br>\nHigh-ceiling living area<br>\nDining and Kitchen Area<br>\nCarport with Deck<br>\nComplete finish\n</html>");
+        btnRequestAgent.setText("REQUEST AGENT");
+        btnRequestAgent.addActionListener(this::btnRequestAgentActionPerformed);
 
-        lblArea.setText("<html>\nFloor Area: 79 sqm<br>\nLot Area: 96 sqm\n</html>");
+        btnBack.setText("BACK");
+        btnBack.addActionListener(this::btnBackActionPerformed);
 
-        btnChoosePayment.setText("REQUEST AGENT");
-        btnChoosePayment.addActionListener(this::btnChoosePaymentActionPerformed);
+        lblGalleryImage.setText("jLabel1");
+
+        btnNext.setText("NEXT");
+        btnNext.addActionListener(this::btnNextActionPerformed);
+
+        btnPrev.setText("PREV");
+        btnPrev.addActionListener(this::btnPrevActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -74,57 +156,117 @@ public class PropertyDetails extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnRequestAgent))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(347, 347, 347)
+                        .addGap(14, 14, 14)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPropertyName, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblPropertyDetailsInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(336, 336, 336)
-                        .addComponent(btnChoosePayment)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPropertyDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPropertyImage, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(45, 45, 45)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblPropertyName, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblPropertyDetailsInfo)
+                                    .addComponent(lblArea))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblPropertyDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addGap(0, 33, Short.MAX_VALUE)
+                .addComponent(btnPrev, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblGalleryImage, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnNext)
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(12, 12, 12)
                 .addComponent(lblPropertyDetails)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblPropertyName)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblPropertyName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPropertyDetailsInfo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblArea))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(lblPropertyImage, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblPropertyDetailsInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnChoosePayment)
-                .addContainerGap(277, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 213, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnPrev)
+                            .addComponent(btnNext))
+                        .addGap(44, 44, 44))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblGalleryImage, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRequestAgent)
+                    .addComponent(btnBack))
+                .addContainerGap())
         );
 
-        btnChoosePayment.getAccessibleContext().setAccessibleDescription("");
+        btnRequestAgent.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnChoosePaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChoosePaymentActionPerformed
-        new PaymentOption(currentProperty).setVisible(true);
+    private void btnRequestAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestAgentActionPerformed
+        // Pass the property forward to the contact form
+        new ContactAgent(currentProperty, currentBuyer).setVisible(true);
         // Close the current details window
-        this.dispose();// TODO add your handling code here:
-    }//GEN-LAST:event_btnChoosePaymentActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnRequestAgentActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        new ClientDashboard(currentBuyer).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        if (imageList == null || imageList.length == 0) return;
+        currentImageIndex++;
+        if (currentImageIndex >= imageList.length) {
+            currentImageIndex = 0; 
+        }
+        loadGalleryImage();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnPrevActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrevActionPerformed
+        // TODO add your handling code here:
+        if (imageList == null || imageList.length == 0) return;
+        currentImageIndex--;
+        if (currentImageIndex < 0) {
+            currentImageIndex = imageList.length - 1; 
+        }
+        loadGalleryImage();
+    }//GEN-LAST:event_btnPrevActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnChoosePayment;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnPrev;
+    private javax.swing.JButton btnRequestAgent;
     private javax.swing.JLabel lblArea;
+    private javax.swing.JLabel lblGalleryImage;
     private javax.swing.JLabel lblPropertyDetails;
     private javax.swing.JLabel lblPropertyDetailsInfo;
+    private javax.swing.JLabel lblPropertyImage;
     private javax.swing.JLabel lblPropertyName;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,21 +4,26 @@
  */
 package GUIs;
 
-/**
- *
- * @author User
- */
+import MyLib.Buyer;
+import MyLib.Property;
+import MyLib.Request; // You will need this for the next steps
+import MyLib.Data;
+
 public class ContactAgent extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ContactAgent.class.getName());
+    private Property currentProperty;
+    private final Buyer currentBuyer;
 
-    /**
-     * Creates new form ContactAgent
-     */
-    public ContactAgent() {
+    public ContactAgent(Property property, MyLib.Buyer buyer) {
+        this.currentProperty = property;
+        this.currentBuyer = buyer;
         initComponents();
+        populateData();
     }
-
+    private void populateData() {
+        String formattedPrice = String.format("PHP %,.2f", currentProperty.getPrice());
+        lblPropertyInfo.setText("Property: " + currentProperty.getId() + " | TCP: " + formattedPrice);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,103 +34,157 @@ public class ContactAgent extends javax.swing.JFrame {
     private void initComponents() {
 
         lblContactTitle = new javax.swing.JLabel();
-        lblPropertyName = new javax.swing.JLabel();
         lblRequestProperty = new javax.swing.JLabel();
-        btnSendRequest = new javax.swing.JButton();
-        lblRequestStatus = new javax.swing.JLabel();
+        lblPropertyInfo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        cmbPayment = new javax.swing.JComboBox<>();
+        btnSubmitRequest = new javax.swing.JButton();
+        txtIncome = new javax.swing.JTextField();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblContactTitle.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        lblContactTitle.setText("CONTACT AGENT");
-
-        lblPropertyName.setText("Property: KAYLA");
+        lblContactTitle.setText("REQUEST \nSAMPLE COMPUTATION");
 
         lblRequestProperty.setText("Interested in this property? Send a request to available agents");
 
-        btnSendRequest.setText("SEND REQUEST");
-        btnSendRequest.addActionListener(this::btnSendRequestActionPerformed);
+        lblPropertyInfo.setText("Input your Monthly Income:");
 
-        lblRequestStatus.setText("Your request has been forwarded to available agents");
+        jLabel1.setText("Preferred Payment:");
+
+        cmbPayment.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Spot Cash", "Bank Financing", "In-House Financing", "Pag-ibig Housing Loan", " " }));
+        cmbPayment.addActionListener(this::cmbPaymentActionPerformed);
+
+        btnSubmitRequest.setText("SUBMIT REQUEST");
+        btnSubmitRequest.addActionListener(this::btnSubmitRequestActionPerformed);
+
+        txtIncome.setText("(PHP)");
+        txtIncome.addActionListener(this::txtIncomeActionPerformed);
+
+        btnBack.setText("BACK");
+        btnBack.addActionListener(this::btnBackActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lblContactTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblContactTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(86, 86, 86))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblRequestStatus)
-                .addGap(58, 58, 58))
+                .addComponent(lblRequestProperty, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(61, 61, 61))
             .addGroup(layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(lblPropertyName))
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSubmitRequest)
+                        .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(lblRequestProperty, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(btnSendRequest)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmbPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblPropertyInfo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtIncome, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblContactTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17)
-                .addComponent(lblContactTitle)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtIncome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPropertyInfo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblPropertyName)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(cmbPayment, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblRequestProperty)
-                .addGap(27, 27, 27)
-                .addComponent(btnSendRequest)
-                .addGap(36, 36, 36)
-                .addComponent(lblRequestStatus)
-                .addContainerGap(87, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSubmitRequest)
+                    .addComponent(btnBack))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSendRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSendRequestActionPerformed
+    private void btnSubmitRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitRequestActionPerformed
+       
+        try {
+            // 1. Capture and validate the income input
+            String incomeText = txtIncome.getText().trim();
+            if (incomeText.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Please enter your monthly income.", "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            double income = Double.parseDouble(incomeText);
+
+            // 2. Capture the selected payment method
+            String paymentMethod = (String) cmbPayment.getSelectedItem();
+
+           // 3. Create the Request using the actual logged-in buyer's username
+            MyLib.Request newRequest = new MyLib.Request(currentBuyer.getUsername(), currentProperty.getId(), income, paymentMethod);
+
+            // 4. Save to the Singleton
+            MyLib.Data.getInstance().clientRequests.add(newRequest);
+            
+            // 5. Save the data file (Uncomment this if your Facade save method is ready)
+            // MyLib.LeaseWoodFacade.saveSystemData(); 
+
+            // 6. Show success message
+            javax.swing.JOptionPane.showMessageDialog(this, "Request sent to an agent! They will provide a computation shortly.", "Success", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            // 7. Return to the Client Dashboard and pass the session back
+            new ClientDashboard(currentBuyer).setVisible(true);
+            this.dispose();
+
+        } catch (NumberFormatException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a valid number for income (e.g., 50000).", "Invalid Input", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    // TODO add your handling code here:
+    }//GEN-LAST:event_btnSubmitRequestActionPerformed
+
+    private void cmbPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPaymentActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnSendRequestActionPerformed
+    }//GEN-LAST:event_cmbPaymentActionPerformed
+
+    private void txtIncomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIncomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIncomeActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        new ClientDashboard(currentBuyer).setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new ContactAgent().setVisible(true));
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSendRequest;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSubmitRequest;
+    private javax.swing.JComboBox<String> cmbPayment;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblContactTitle;
-    private javax.swing.JLabel lblPropertyName;
+    private javax.swing.JLabel lblPropertyInfo;
     private javax.swing.JLabel lblRequestProperty;
-    private javax.swing.JLabel lblRequestStatus;
+    private javax.swing.JTextField txtIncome;
     // End of variables declaration//GEN-END:variables
 }

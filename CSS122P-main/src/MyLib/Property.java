@@ -13,19 +13,27 @@ public class Property implements Serializable {
     private double price;    // Total Contract Price (TCP)
     private String buyer;
     private boolean listed;
+    private String modelName;
+    private double floorArea;
+    private String features;
     
     // The current state of the property
     private PropertyState state;
+    private String status;
+    private final int lot;
 
-    public Property(String id, int block, int lotNumber, double lotSize, double price) {
+    public Property(String id, int block, int lot, String modelName, double lotSize, double floorArea, double price, String features) {
         this.id = id;
         this.block = block;
-        this.lotNumber = lotNumber;
+        this.lot = lot;
+        this.modelName = modelName;
         this.lotSize = lotSize;
+        this.floorArea = floorArea;
         this.price = price;
-        this.buyer = null;
+        this.features = features;
+        this.status = "Available"; // Default state
         this.listed = true;
-        this.state = new AvailableState(); // Default state
+        this.state = new AvailableState(); // If using the State pattern initialization
     }
 
     // State Pattern Delegation Methods
@@ -62,4 +70,19 @@ public class Property implements Serializable {
     
     public void setState(PropertyState state) { this.state = state; }
 
+    public String getModelName() {
+        return modelName; 
+    }
+    public double getFloorArea() { 
+        return floorArea; 
+    }
+    public String getFeatures() {
+        return features; 
+    }
+    public PropertyState getState() {
+        return this.state;
+    }
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }

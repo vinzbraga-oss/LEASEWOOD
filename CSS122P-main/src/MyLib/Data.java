@@ -18,6 +18,8 @@ public class Data implements Serializable{
 
     public java.util.ArrayList<Request> clientRequests = new java.util.ArrayList<>();
     private Data() {
+        MyLib.Buyer testBuyer = new MyLib.Buyer("buyer", "1234");
+        buyers.put(testBuyer.getUsername(), testBuyer);
     }
 
     public static Data getInstance() {
@@ -29,35 +31,64 @@ public class Data implements Serializable{
     
     // Add this method below your getInstance() method
     public void seedInitialData() {
-        // Prevent re-seeding if data already exists
         if (!properties.isEmpty()) {
             return; 
         }
 
-        System.out.println("Generating 100 subdivision lots...");
+        System.out.println("Generating property models...");
         
-        // --- ADD THIS BLOCK FOR TEST ACCOUNTS ---
-        System.out.println("Generating default test accounts...");
+        // Default test account
         MyLib.Buyer testBuyer = new MyLib.Buyer("buyer", "1234");
         buyers.put(testBuyer.getUsername(), testBuyer);
-        // ----------------------------------------
-        // Loop through 5 blocks
+
+        String[] models = {"KAYLA", "ALEXANDRIA", "AMARA", "ARYA"};
+
         for (int b = 1; b <= 5; b++) {
-            // Loop through 20 lots per block
             for (int l = 1; l <= 20; l++) {
-                // Generate a formatted ID like "B1-L01"
-                String id = "B" + b + "-L" + String.format("%02d", l);
                 
-                // Variable pricing and sizing logic based on the block
-                double lotSize = 90.0 + (b * 10.0); // e.g., Block 1 = 100sqm, Block 5 = 140sqm
-                double pricePerSqm = 15000.0;       // PHP 15,000 per square meter
-                double price = lotSize * pricePerSqm;
+                // Distribute models evenly using modulo arithmetic
+                String assignedModel = models[(b + l) % 4]; 
                 
-                // Instantiate the Property and save it to the HashMap
-                properties.put(id, new Property(id, b, l, lotSize, price));
+                String id = "B" + b + "-L" + String.format("%02d", l) + "-" + assignedModel;
+                
+                double lotArea = 0;
+                double floorArea = 0;
+                double tcp = 0;
+                String features = "";
+
+                switch (assignedModel) {
+                    case "KAYLA":
+                        lotArea = 96.0;
+                        floorArea = 79.0;
+                        tcp = 7097440.0;
+                        features = "<html>Two-storey<br>Single-attached<br>3 bedrooms<br>2 toilet & bath<br>High-ceiling living area<br>Dining and Kitchen Area<br>Carport with Deck<br>Complete finish</html>";
+                        break;
+                    case "ALEXANDRIA":
+                        lotArea = 138.0;
+                        floorArea = 159.0;
+                        tcp = 12206760.0;
+                        features = "<html>Two-storey<br>Single-attached with attic<br>5 bedrooms<br>3 toilet & bath<br>Sliding door to lanai<br>Living, Dining and Kitchen Area<br>Carport with Deck<br>Complete finish</html>";
+                        break;
+                    case "AMARA":
+                        lotArea = 110.0;
+                        floorArea = 131.0;
+                        tcp = 9444400.0;
+                        features = "<html>Two-storey<br>Single-attached with attic<br>3 bedrooms<br>3 toilet & bath<br>Maid's room<br>Living, Dining and Kitchen Area<br>Carport with Deck<br>Complete finish</html>";
+                        break;
+                    case "ARYA":
+                        lotArea = 96.0;
+                        floorArea = 84.0;
+                        tcp = 7265440.0;
+                        features = "<html>Two-storey<br>Single-attached<br>3 bedrooms<br>2 toilet & bath<br>Family room<br>Dining and Kitchen Area<br>Carport with Deck<br>Complete finish</html>";
+                        break;
+                }
+
+                // Instantiate the specific property model
+                properties.put(id, new Property(id, b, l, assignedModel, lotArea, floorArea, tcp, features));
             }
         }
     }
+    public java.util.ArrayList<Message> allMessages = new java.util.ArrayList<>();
     public static void setInstance(Data loadedData) {
         instance = loadedData;
     }

@@ -11,13 +11,56 @@ package GUIs;
 public class AdminDashboard extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(AdminDashboard.class.getName());
-
+    
+    public AdminDashboard() {
+        initComponents();
+        loadAdminProperties(); 
+        loadAdminSales();
+        loadAgents();
+    }
     /**
      * Creates new form AdminDashboard
      */
-    public AdminDashboard() {
-        initComponents();
+    private void loadAdminProperties() {
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblAdminProperties.getModel();
+        model.setRowCount(0);
+
+        for (MyLib.Property p : MyLib.Data.getInstance().properties.values()) {
+            model.addRow(new Object[]{
+                p.getId(), 
+                p.getModelName(), 
+                p.getStatus()
+            });
+        }
     }
+    private void loadAdminSales() {
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblAdminSales.getModel();
+        model.setRowCount(0);
+
+        for (MyLib.Request req : MyLib.Data.getInstance().clientRequests) {
+            if (req.getStatus().equals("Reserved") || req.getStatus().equals("Sold")) {
+                MyLib.Property prop = MyLib.Data.getInstance().properties.get(req.getPropertyId());
+                String tcp = (prop != null) ? String.format("PHP %,.2f", prop.getPrice()) : "Unknown";
+
+                model.addRow(new Object[]{
+                    req.getPropertyId(),
+                    req.getBuyerUsername(),
+                    tcp,
+                    "Ongoing" 
+                });
+            }
+        }
+    }
+    private void loadAgents() {
+        javax.swing.table.DefaultTableModel model = (javax.swing.table.DefaultTableModel) tblAgents.getModel();
+        model.setRowCount(0); 
+
+        
+        for (String agentUsername : MyLib.Data.getInstance().agents.keySet()) {
+            model.addRow(new Object[]{agentUsername});
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,47 +71,300 @@ public class AdminDashboard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtAgentuser = new javax.swing.JTextField();
+        txtAgentPass = new javax.swing.JPasswordField();
+        btnCreateAgent = new javax.swing.JButton();
+        btnLogout = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblAgents = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblAdminProperties = new javax.swing.JTable();
+        btnToggleListing = new javax.swing.JButton();
+        btnMarkReserved = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblAdminSales = new javax.swing.JTable();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Agent Username:");
+
+        jLabel2.setText("Agent Password:");
+
+        txtAgentuser.setText("Enter name");
+        txtAgentuser.addActionListener(this::txtAgentuserActionPerformed);
+
+        txtAgentPass.setText("jPasswordField1");
+        txtAgentPass.addActionListener(this::txtAgentPassActionPerformed);
+
+        btnCreateAgent.setText("Create Agent Account");
+        btnCreateAgent.addActionListener(this::btnCreateAgentActionPerformed);
+
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(this::btnLogoutActionPerformed);
+
+        tblAgents.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Agent Username"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblAgents);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnCreateAgent)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtAgentPass, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtAgentuser, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtAgentuser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtAgentPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnCreateAgent)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnLogout)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Manage Agents", jPanel1);
+
+        tblAdminProperties.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Property ID", "Model", "Status"
+            }
+        ));
+        jScrollPane1.setViewportView(tblAdminProperties);
+
+        btnToggleListing.setText("PULL / RESTORE LISTING");
+        btnToggleListing.addActionListener(this::btnToggleListingActionPerformed);
+
+        btnMarkReserved.setText("MARK AS RESERVED");
+        btnMarkReserved.addActionListener(this::btnMarkReservedActionPerformed);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(65, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnToggleListing)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnMarkReserved))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnToggleListing)
+                    .addComponent(btnMarkReserved))
+                .addContainerGap(154, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Manage Properties", jPanel2);
+
+        tblAdminSales.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Property ID", "Buyer", "Total Contract Price", "Amortization Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblAdminSales);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 507, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(100, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("View Sales", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtAgentuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgentuserActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAgentuserActionPerformed
+
+    private void txtAgentPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAgentPassActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtAgentPassActionPerformed
+
+    private void btnCreateAgentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAgentActionPerformed
+        String user = txtAgentuser.getText().trim();
+        String pass = new String(txtAgentPass.getPassword());
+
+        if (user.isEmpty() || pass.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Please fill in all fields.");
+            return;
+        }
+
+        if (MyLib.Data.getInstance().agents.containsKey(user)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Agent username already exists.");
+            return;
+        }
+
+        MyLib.Agent newAgent = new MyLib.Agent(user, pass);
+        MyLib.Data.getInstance().agents.put(user, newAgent);
+
+        javax.swing.JOptionPane.showMessageDialog(this, "Agent account created successfully.");
+        txtAgentuser.setText("");
+        txtAgentPass.setText("");
+        
+        loadAgents();
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnCreateAgentActionPerformed
+
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        new Login().setVisible(true);
+        this.dispose();// TODO add your handling code here:
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnToggleListingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToggleListingActionPerformed
+        int selectedRow = tblAdminProperties.getSelectedRow();
+        if (selectedRow == -1) return;
+
+        String propertyId = (String) tblAdminProperties.getValueAt(selectedRow, 0);
+        MyLib.Property prop = MyLib.Data.getInstance().properties.get(propertyId);
+
+        if (prop != null) {
+            prop.setListed(!prop.isListed()); // Toggle the boolean
+            loadAdminProperties(); // Refresh UI
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnToggleListingActionPerformed
+
+    private void btnMarkReservedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMarkReservedActionPerformed
+        int selectedRow = tblAdminProperties.getSelectedRow();
+        if (selectedRow == -1) return;
+
+        String propertyId = (String) tblAdminProperties.getValueAt(selectedRow, 0);
+        MyLib.Property prop = MyLib.Data.getInstance().properties.get(propertyId);
+
+        if (prop != null && prop.getStatus().equals("Available")) {
+            // Trigger State Pattern or manual override
+            prop.setStatus("Reserved");
+            loadAdminProperties();
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_btnMarkReservedActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new AdminDashboard().setVisible(true));
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCreateAgent;
+    private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnMarkReserved;
+    private javax.swing.JButton btnToggleListing;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable tblAdminProperties;
+    private javax.swing.JTable tblAdminSales;
+    private javax.swing.JTable tblAgents;
+    private javax.swing.JPasswordField txtAgentPass;
+    private javax.swing.JTextField txtAgentuser;
     // End of variables declaration//GEN-END:variables
 }

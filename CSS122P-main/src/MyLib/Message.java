@@ -8,18 +8,18 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 public class Message implements Serializable {
+    private String senderUsername;
+    private String receiverUsername;
+    private String content;
 
-    public String from;
-    public String to;
-    public String text;
-    public String time;
-
-    public Message(String f, String t, String m) {
-        from = f;
-        to = t;
-        text = m;
-        time = LocalDateTime.now().toString()
-                .replace('T', ' ').substring(0, 16);
+    public Message(String senderUsername, String receiverUsername, String content) {
+        this.senderUsername = senderUsername;
+        this.receiverUsername = receiverUsername;
+        this.content = content;
     }
+
+    public String getSenderUsername() { return senderUsername; }
+    public String getReceiverUsername() { return receiverUsername; }
+    public String getContent() { return content; }
 }
 

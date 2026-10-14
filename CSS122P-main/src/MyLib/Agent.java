@@ -12,9 +12,27 @@ import java.io.Serializable;
  */
 
 public class Agent extends User implements Serializable {
+    private double commissionBalance;
     
     public Agent(String username, String password) {
         super(username, password);
+        this.commissionBalance = 50000.00;
+    }
+    
+    public double getCommissionBalance() { 
+        return commissionBalance; 
+    }
+    
+    public void addCommission(double amount) { 
+        this.commissionBalance += amount; 
+    }
+    
+    public boolean withdraw(double amount) {
+        if (amount > 0 && amount <= commissionBalance) {
+            commissionBalance -= amount;
+            return true;
+        }
+        return false;
     }
 
     @Override

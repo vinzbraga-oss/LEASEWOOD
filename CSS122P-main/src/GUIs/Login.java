@@ -8,14 +8,14 @@ package GUIs;
  *
  * @author User
  */
-public class Client extends javax.swing.JFrame {
+public class Login extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Client.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Login.class.getName());
 
     /**
      * Creates new form ClientLogin
      */
-    public Client() {
+    public Login() {
         initComponents();
     }
 
@@ -89,8 +89,8 @@ public class Client extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(153, 153, 153))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(131, 131, 131))))
+                        .addComponent(jLabel2)
+                        .addGap(144, 144, 144))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,14 +136,15 @@ public class Client extends javax.swing.JFrame {
             // Route to the correct JFrame based on the role
             String role = authUser.getRole();
             if (role.equals("Client")) {
-                new PropertyList().setVisible(true); // Or whatever your Client Dashboard JFrame is named
+                // Cast authUser to Buyer and pass it to the ClientDashboard
+                new ClientDashboard((MyLib.Buyer) authUser).setVisible(true);
             } else if (role.equals("Agent")) {
                 new AgentDashboard().setVisible(true);
             } else if (role.equals("Admin")) {
                 new AdminDashboard().setVisible(true);
             }
             
-            this.dispose(); // Close the login JFrame
+            this.dispose(); 
             
         } else {
             javax.swing.JOptionPane.showMessageDialog(this, "Invalid credentials.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -178,7 +179,7 @@ public class Client extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Client().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Login().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
