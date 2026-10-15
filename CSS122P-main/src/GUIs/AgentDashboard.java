@@ -107,6 +107,10 @@ public class AgentDashboard extends javax.swing.JFrame {
     public AgentDashboard() {
         initComponents();
         loadRequests();
+        loadSchedule();             // Populates the Schedule table and the Combo Box
+        loadSettledTransactions();  // Populates the Settled Transactions table
+        loadChatClients();          // Populates the Chat list with buyers
+        loadWalletBalance();
     }
 
     /**
@@ -471,7 +475,7 @@ public class AgentDashboard extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tblSchedule);
 
-        cmbScheduleClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbScheduleClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "choose client", " " }));
 
         txtScheduleDate.setText("(MM/DD/YYY) - (HH:MM AM/PM)");
         txtScheduleDate.addActionListener(this::txtScheduleDateActionPerformed);
